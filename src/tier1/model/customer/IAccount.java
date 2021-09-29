@@ -1,8 +1,9 @@
 package tier1.model.customer;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 
-public interface IAccount
+public interface IAccount extends Serializable
 {
   boolean login(int Id);
   void withdraw(int id, double amount) throws RemoteException;

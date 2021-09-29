@@ -1,8 +1,9 @@
 package tier1.networking.customerclient;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 
-public interface ICustomerClient
+public interface ICustomerClient extends Serializable
 {
 
   public static final String CLIENT_SERVICE_NAME = "rmi://localhost/CLIENT";

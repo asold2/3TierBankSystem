@@ -2,6 +2,8 @@ package tier1.viewmodel.customer;
 
 import tier1.model.customer.IAccount;
 
+import java.rmi.RemoteException;
+
 public class CustomerViewModel
 {
   private IAccount customer;

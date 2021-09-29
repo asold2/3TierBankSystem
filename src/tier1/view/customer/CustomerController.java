@@ -1,11 +1,12 @@
 package tier1.view.customer;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import tier1.view.ViewHandler;
 import tier1.viewmodel.ViewModelFactory;
 import tier1.viewmodel.customer.CustomerViewModel;
 
-import java.awt.*;
 
 public class CustomerController
 {

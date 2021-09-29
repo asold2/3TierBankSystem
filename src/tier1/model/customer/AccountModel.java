@@ -2,9 +2,10 @@ package tier1.model.customer;
 
 import tier1.networking.customerclient.ICustomerClient;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 
-public class AccountModel implements IAccount
+public class AccountModel implements IAccount, Serializable
 {
   private String name;
   private String lastName;

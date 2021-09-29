@@ -3,6 +3,7 @@ package tier2;
 import tier1.model.customer.AccountModel;
 import tier3.Tier3Server;
 
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -47,7 +48,7 @@ public class Tier2ServerImpl extends UnicastRemoteObject implements Tier2Server
   {
     try
     {
-      return tier3.getAccount(id)!=null;
+      return tier3.getAccount(id) != null;
     }
     catch (RemoteException e)
     {

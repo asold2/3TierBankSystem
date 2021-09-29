@@ -1,5 +1,6 @@
 package tier1.networking.customerclient;
 
+import tier1.model.customer.AccountModel;
 import tier2.Tier2Server;
 
 import java.net.MalformedURLException;
@@ -29,15 +30,7 @@ public class CustomerClient extends UnicastRemoteObject implements ICustomerClie
     {
       server = (Tier2Server) Naming.lookup(T2_SERVICE_NAME);
     }
-    catch (NotBoundException e)
-    {
-      e.printStackTrace();
-    }
-    catch (MalformedURLException e)
-    {
-      e.printStackTrace();
-    }
-    catch (RemoteException e)
+    catch (NotBoundException | RemoteException | MalformedURLException e)
     {
       e.printStackTrace();
     }
@@ -46,6 +39,8 @@ public class CustomerClient extends UnicastRemoteObject implements ICustomerClie
   @Override public void withdraw(int id, double amount) throws RemoteException
   {
     server.withdraw(id, amount);
+    System.out.println("Here3");
+    System.out.println(getAccountById(id).getAmount());
 
   }
 
@@ -60,5 +55,18 @@ public class CustomerClient extends UnicastRemoteObject implements ICustomerClie
       e.printStackTrace();
     }
     return false;
+  }
+
+  @Override public AccountModel getAccountById(int id)
+  {
+    try
+    {
+      return server.getAccountById(id);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return null;
   }
 }

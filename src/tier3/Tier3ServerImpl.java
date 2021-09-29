@@ -1,6 +1,7 @@
 package tier3;
 
 import tier1.model.customer.AccountModel;
+import tier1.model.customer.IAccount;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
@@ -65,49 +66,18 @@ public class Tier3ServerImpl implements Tier3Server, Remote
 
   }
 
-  @Override public AccountModel getAccount(int id) throws RemoteException
+  @Override public IAccount getAccount(int id)
+      throws RemoteException, SQLException
   {
     ResultSet rs = null;
     rs = databaseConnection.getAccountById(id);
-    AccountModel account = new AccountModel();
-    while(true){
-      try
-      {
-        if (!rs.next())
-          break;
-      }
-      catch (SQLException throwables)
-      {
-        throwables.printStackTrace();
-      }
-      String name = null;
-      try
-      {
-        name = rs.getString("name");
-      }
-      catch (SQLException throwables)
-      {
-        throwables.printStackTrace();
-      }
-      String lastName = null;
-      try
-      {
-        lastName = rs.getString("lastname");
-      }
-      catch (SQLException throwables)
-      {
-        throwables.printStackTrace();
-      }
-      double amount = 0;
-      try
-      {
-        amount = rs.getDouble("amount");
-      }
-      catch (SQLException throwables)
-      {
-        throwables.printStackTrace();
-      }
-      account.set(name, lastName, id, amount);
+    IAccount account = new AccountModel();
+    while(rs.next()){
+      String name = rs.getString("name");
+      String lastname = rs.getString("lastname");
+      int id2 = rs.getInt("id");
+      double amount = rs.getDouble("amount");
+      account.set(name, lastname, id2, amount);
     }
 
     return account;

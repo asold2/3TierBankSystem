@@ -13,5 +13,5 @@ public interface IAccount extends Serializable
   double getAmount();
   void set(String name, String lastname, int id, double amount);
 
-
+  AccountModel getAccountById(int id);
 }

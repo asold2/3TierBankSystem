@@ -1,14 +1,15 @@
 package tier2;
 
 import tier1.model.customer.AccountModel;
+import tier1.model.customer.IAccount;
 import tier3.Tier3Server;
 
-import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 
 public class Tier2ServerImpl extends UnicastRemoteObject implements Tier2Server
 {
@@ -29,32 +30,38 @@ public class Tier2ServerImpl extends UnicastRemoteObject implements Tier2Server
     {
       tier3 = (Tier3Server) Naming.lookup("DatabaseServer");
     }
-    catch (NotBoundException e)
-    {
-      e.printStackTrace();
-    }
-    catch (MalformedURLException e)
+    catch (NotBoundException | MalformedURLException e)
     {
       e.printStackTrace();
     }
 
-  }
-  @Override public void start()
-  {
-    System.out.println("");
   }
 
   @Override public boolean login(int id)
   {
     try
     {
-      return tier3.getAccount(id) != null;
+      AccountModel temp = (AccountModel) tier3.getAccount(id);
+      return temp!=null;
     }
-    catch (RemoteException e)
+    catch (RemoteException | SQLException e)
     {
       e.printStackTrace();
     }
     return false;
+  }
+
+  @Override public AccountModel getAccountById(int id)
+  {
+    try
+    {
+      return (AccountModel) tier3.getAccount(id);
+    }
+    catch (RemoteException | SQLException e)
+    {
+      e.printStackTrace();
+    }
+    return null;
   }
 
   @Override public void createAccount(int id, String name, String lastname,

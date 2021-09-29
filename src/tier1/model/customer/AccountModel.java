@@ -36,6 +36,8 @@ public class AccountModel implements IAccount, Serializable
   @Override public void withdraw(int id, double amount) throws RemoteException
   {
     client.withdraw(this.id, amount);
+    System.out.println("Here2");
+
   }
 
   public String getName()
@@ -69,6 +71,19 @@ public class AccountModel implements IAccount, Serializable
     this.lastName = lastname;
     this.id = id;
     this.amount = amount;
+  }
+
+  @Override public AccountModel getAccountById(int id)
+  {
+    try
+    {
+      return client.getAccountById(id);
+    }
+    catch (RemoteException e)
+    {
+      e.printStackTrace();
+    }
+    return null;
   }
 
 }

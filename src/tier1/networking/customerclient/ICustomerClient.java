@@ -1,7 +1,9 @@
 package tier1.networking.customerclient;
 
 import tier1.model.customer.AccountModel;
+import tier2.PropertyChangeSubject;
 
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 

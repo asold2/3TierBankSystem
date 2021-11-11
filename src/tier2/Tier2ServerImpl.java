@@ -4,6 +4,9 @@ import tier1.model.customer.AccountModel;
 import tier1.model.customer.IAccount;
 import tier3.Tier3Server;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -14,7 +17,8 @@ import java.sql.SQLException;
 public class Tier2ServerImpl extends UnicastRemoteObject implements Tier2Server
 {
   private Tier3Server tier3;
-
+  private PoolOfClients poolOfClients;
+  private PropertyChangeSupport support;
   public Tier2ServerImpl() throws RemoteException
   {
     try
@@ -34,6 +38,7 @@ public class Tier2ServerImpl extends UnicastRemoteObject implements Tier2Server
     {
       e.printStackTrace();
     }
+    poolOfClients = new PoolOfClients();
 
   }
 
@@ -41,7 +46,7 @@ public class Tier2ServerImpl extends UnicastRemoteObject implements Tier2Server
   {
     try
     {
-      AccountModel temp = (AccountModel) tier3.getAccount(id);
+      IAccount temp = (AccountModel) tier3.getAccount(id);
       return temp!=null;
     }
     catch (RemoteException | SQLException e)
@@ -62,6 +67,11 @@ public class Tier2ServerImpl extends UnicastRemoteObject implements Tier2Server
       e.printStackTrace();
     }
     return null;
+  }
+
+  @Override public PoolOfClients getPoolOfClients()
+  {
+    return poolOfClients;
   }
 
   @Override public void createAccount(int id, String name, String lastname,
@@ -103,6 +113,5 @@ public class Tier2ServerImpl extends UnicastRemoteObject implements Tier2Server
     }
 
   }
-
 
 }

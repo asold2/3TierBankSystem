@@ -33,6 +33,7 @@ public class AdminClient extends UnicastRemoteObject implements IAdminClient
     {
       e.printStackTrace();
     }
+    server.getPoolOfClients().addAdmin(this);
 
   }
 

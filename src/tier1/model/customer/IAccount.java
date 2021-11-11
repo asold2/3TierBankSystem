@@ -1,5 +1,7 @@
 package tier1.model.customer;
 
+import tier2.PropertyChangeSubject;
+
 import java.io.Serializable;
 import java.rmi.RemoteException;
 

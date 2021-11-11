@@ -7,8 +7,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 
-public interface Tier3Server extends Remote
-{
+public interface Tier3Server extends Remote {
   void createAccount(String name, String lastname, int id, double amount) throws RemoteException;
   void withdraw(int id, double amount) throws RemoteException;
   void supply(int id, double amount) throws RemoteException;

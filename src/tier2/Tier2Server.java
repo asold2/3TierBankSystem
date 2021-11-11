@@ -14,4 +14,5 @@ public interface Tier2Server extends Remote
   public static final String T2_SERVICE_NAME = "rmi://localhost/T2";
   boolean login(int id) throws RemoteException;
   AccountModel getAccountById(int id) throws RemoteException;
+  PoolOfClients getPoolOfClients() throws RemoteException;
 }

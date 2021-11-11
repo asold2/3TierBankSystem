@@ -28,18 +28,11 @@ public class ClerkClient extends UnicastRemoteObject implements IClerkClient
     {
       server = (Tier2Server) Naming.lookup(T2_SERVICE_NAME);
     }
-    catch (NotBoundException e)
+    catch (NotBoundException | RemoteException | MalformedURLException e)
     {
       e.printStackTrace();
     }
-    catch (MalformedURLException e)
-    {
-      e.printStackTrace();
-    }
-    catch (RemoteException e)
-    {
-      e.printStackTrace();
-    }
+    server.getPoolOfClients().addClerk(this);
   }
 
   @Override public void withdraw(int id, double amount)

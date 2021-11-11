@@ -1,16 +1,22 @@
 package tier1.viewmodel.customer;
 
+import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import tier1.model.customer.AccountModel;
 import tier1.model.customer.IAccount;
 
+import java.beans.PropertyChangeEvent;
 import java.rmi.RemoteException;
 
 public class CustomerViewModel
 {
-  private IAccount customer;
+  private final IAccount customer;
+  private StringProperty notification;
 
   public CustomerViewModel(IAccount customer){
     this.customer = customer;
+    notification = new SimpleStringProperty();
   }
 
   public boolean login(int id)
@@ -33,5 +39,8 @@ public class CustomerViewModel
     {
       e.printStackTrace();
     }
+  }
+  public StringProperty getNotification(){
+    return notification;
   }
 }

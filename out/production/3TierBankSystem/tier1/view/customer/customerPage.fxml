@@ -18,5 +18,10 @@
          </font>
       </Label>
       <Label fx:id="myMoney" layoutX="286.0" layoutY="30.0" text="Label" visible="false" />
+      <Label fx:id="notification" layoutX="60.0" layoutY="239.0" text="Label" textFill="RED">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -2,6 +2,9 @@ package tier1.model.customer;
 
 import tier1.networking.customerclient.ICustomerClient;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 
@@ -18,6 +21,7 @@ public class AccountModel implements IAccount, Serializable
   }
   public AccountModel(ICustomerClient client){
     this.client = client;
+    System.out.println(client);
   }
 
   @Override public boolean login(int Id)
@@ -36,6 +40,7 @@ public class AccountModel implements IAccount, Serializable
   @Override public void withdraw(int id, double amount) throws RemoteException
   {
     client.withdraw(this.id, amount);
+    System.out.println(client.getAccountById(id).getName());
     System.out.println("Here2");
 
   }

@@ -7,7 +7,7 @@ import tier1.view.ViewHandler;
 import tier1.viewmodel.ViewModelFactory;
 import tier1.viewmodel.customer.CustomerViewModel;
 
-
+import java.rmi.RemoteException;
 
 public class CustomerController
 {
@@ -19,6 +19,7 @@ public class CustomerController
   @FXML private Button withdraw;
   @FXML private Label error;
   @FXML private Label myMoney;
+  @FXML private Label notification;
 
 
   public void init(ViewHandler vh, ViewModelFactory vmf){
@@ -28,6 +29,7 @@ public class CustomerController
     withdraw.setVisible(false);
     customerViewModel = vmf.getCustomerViewModel();
     error.setVisible(false);
+    notification.textProperty().bind(customerViewModel.getNotification());
   }
 
   @FXML public void onButtonLogin(){
@@ -42,9 +44,10 @@ public class CustomerController
       error.setVisible(true);
     }
   }
-  @FXML public void onWithdraw(){
+  @FXML public void onWithdraw()
+  {
     customerViewModel.withdraw(Integer.parseInt(id.getText()), Double.parseDouble(amount.getText()));
-    System.out.println("Money withdrown by client");
+    System.out.println("Money withdrown by client " + customerViewModel.getAccountById(Integer.parseInt(id.getText())).getName());
 
   }
 

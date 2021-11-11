@@ -67,7 +67,7 @@ public class Tier3ServerImpl implements Tier3Server, Remote
   }
 
   @Override public IAccount getAccount(int id)
-      throws RemoteException, SQLException
+      throws SQLException
   {
     ResultSet rs = null;
     rs = databaseConnection.getAccountById(id);
@@ -79,7 +79,6 @@ public class Tier3ServerImpl implements Tier3Server, Remote
       double amount = rs.getDouble("amount");
       account.set(name, lastname, id2, amount);
     }
-
     return account;
   }
 }
